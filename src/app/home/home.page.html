@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Inicio
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col text-center>
+        <h1>Total de Animales</h1>
+        <h1>670</h1>
+      </ion-col>
+      <ion-col text-center> 
+        <h1>Coorderos</h1>
+        <h1>430</h1>
+      </ion-col>
+      <ion-col text-center>
+        <h1>Aumento en masa</h1>
+        <h1>1700 Kg</h1>
+
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="8">
+          <div #chartContainer class='chart-container'>
+              <canvas  #chartcanvas id="myChart1"></canvas>
+          </div>
+      </ion-col>
+      <ion-col size="4">
+          <div #chartContainer1 class='chart-container1'>
+              <canvas  #chartcanvas1 id="myChart2"></canvas>
+          </div>
+        
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

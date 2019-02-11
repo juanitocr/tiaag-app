@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="primary">
+         <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+    <ion-title>Monitor</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+      <ion-row>
+      <ion-col size="8">
+        <ion-row><h2>Arete: 4234</h2></ion-row>
+        <ion-row><h1>Peso: 45 Kg</h1></ion-row>
+      </ion-col>
+      <ion-col size="4">
+      <ion-row><h1>Alerta</h1></ion-row>
+      <ion-row>
+          <ion-button color="secondary">Comentar</ion-button>
+
+      </ion-row>
+      </ion-col>
+    </ion-row>
+      <ion-row>
+        <ion-col size="8">
+            <div #chartContainer class='chart-container'>
+                <canvas  #chartcanvas id="myChart"></canvas>
+            </div>
+
+        </ion-col>
+        <ion-col size="4">
+          <!-- List of Text Items -->
+<ion-list>
+    <ion-item>
+      <img src="./../../assets/img/icons8_Lamb_104px.png" width="10%">
+      <ion-label>&nbsp;&nbsp;3399 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>42 kg</strong></ion-label>
+    </ion-item>
+    <ion-item>
+      <img src="./../../assets/img/icons8_Lamb_104px.png" width="10%">
+      <ion-label>&nbsp;&nbsp;4599 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>46 kg</strong></ion-label>
+    </ion-item>
+    <ion-item>
+      <img src="./../../assets/img/icons8_Lamb_104px.png" width="10%">
+      <ion-label>&nbsp;&nbsp;7699 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>45 kg</strong></ion-label>
+    </ion-item>
+    <ion-item>
+      <img src="./../../assets/img/icons8_Lamb_104px.png" width="10%">
+      <ion-label>&nbsp;&nbsp;6548 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>65 kg</strong></ion-label>
+    </ion-item>
+  </ion-list>
+        </ion-col> 
+      </ion-row>
+    </ion-grid>
+</ion-content>
