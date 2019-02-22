@@ -1,36 +1,50 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Monitor } from './../interfaces/monitor';
-import { Arrays } from './../interfaces/arrays';
+import { Registro } from './../interfaces/registro';
 import { Observable } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
 export class MonitorService {
-  private itemsCollection: AngularFirestoreCollection<Monitor>;
-  private arraysCollection: AngularFirestoreCollection<Arrays>;
-  public monitors : Monitor[] = [];
-  public arrays : Arrays[] = [];
-  constructor(private afs: AngularFirestore) {  
-   }
-   loadMonitor(){
-   
-    this.itemsCollection = this.afs.collection<Monitor>('monitores');  
-    return this.itemsCollection.valueChanges()
-    .subscribe(
-      (mo:Monitor[]) =>{
-        this.monitors = mo;
-    });
+  private monitorCollection: AngularFirestoreDocument<Monitor>;
+  private arraysCollection: AngularFirestoreCollection<Registro>;
+  private listRegistros: AngularFirestoreCollection<Registro>;
+  public fechas: number[] = [];
+  public pesos: number[] = [];
+  public monitor: Monitor;
+  public arrays: Registro[] = [];
+  public list5: Registro[] = [];
+  constructor(private afs: AngularFirestore) {
+  }
 
-   }
-   loadArrays(){   
-    this.arraysCollection = this.afs.collection<Arrays>('registro/1/45:a9:0c:47');  
-    return this.arraysCollection.valueChanges()
-    .subscribe(
-      (arr:Arrays[]) =>{
-        this.arrays = arr;
-    });
-
-   }
-   
-}
+  async loadArrays() {
+    this.monitorCollection = await this.afs.doc<Monitor>('monitores/1');
+    await this.monitorCollection.valueChanges().subscribe(
+      (m: Monitor) => {
+        this.monitor = m;
+        this.arraysCollection = this.afs.collection<Registro>('registro', ref => ref.where('rfid', '==', m.rfid).limit(1));
+        this.arraysCollection.valueChanges()
+          .subscribe(
+            (arr: Registro[]) => {
+              this.fechas = [];
+              this.pesos = [];
+              for (const iterator of arr) {
+                this.fechas.push(iterator.fecha);
+                this.pesos.push(iterator.peso);
+              }
+              this.arrays = arr;
+                //Consulta a los datos de la tabla
+              this.listRegistros = this.afs.collection<Registro>('registro', ref => ref.where('ganadero', '==', '1').limit(5));
+              this.arraysCollection.valueChanges()
+                .subscribe(
+                  (arr: Registro[]) => {                      
+                    this.list5 = arr;
+              });
+            }
+          );
+      });
+    }
+    
+  }
