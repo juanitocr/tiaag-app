@@ -10,14 +10,14 @@
 <ion-content>
     <ion-grid>
       <ion-row>
-      <ion-col size="8">
-        <ion-row><h2>Arete: 4234</h2></ion-row>
-        <ion-row><h1>Peso: 45 Kg</h1></ion-row>
+      <ion-col size="8" *ngFor="let item of ms.monitors">
+        <ion-row><h2>Arete: {{item.arete}}</h2></ion-row>
+        <ion-row><h1>Peso: {{item.peso}} Kg</h1></ion-row>
       </ion-col>
       <ion-col size="4">
       <ion-row><h1>Alerta</h1></ion-row>
       <ion-row>
-          <ion-button color="secondary">Comentar</ion-button>
+        <ion-button color="secondary" block (click)="doPrompt()">Comentar</ion-button>
 
       </ion-row>
       </ion-col>

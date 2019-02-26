@@ -1,17 +1,37 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
+export interface Todo {
+  id?: string;
+  peso: string;
+  arete:string;
+  rfid: string;
+}
 @Injectable({
   providedIn: 'root'
 })
 export class DatosService {
+  private todosCollection: AngularFirestoreCollection<Todo>;
+ 
+  private todos: Observable<Todo[]>;
+  constructor(private db: AngularFirestore) {
 
-  constructor(private angularFireDatabase: AngularFireDatabase) {
+  this.todosCollection = db.collection<Todo>('Monitor');
+  this.todos = this.todosCollection.snapshotChanges().pipe(
+    map(actions => {
+      return actions.map(a => {
+        const data = a.payload.doc.data();
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      });
+    })
+   );
   }
-
-    getInfoSheepMonitor(id){
-    return this.angularFireDatabase.object('/Monitor');
-   }
-
-   
+  
+  getTodos() {
+    return this.todos;
+  }
+ 
 }

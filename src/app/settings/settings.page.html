@@ -18,13 +18,39 @@
               </ion-card-header>
             
               <ion-card-content>
-                  <ion-input placeholder="Peso: mayor o igual"></ion-input>
-                  <ion-button color="secondary">Guardar</ion-button>
+                <ion-item>
+                  <ion-range min="0" max="200" color="secondary">
+                    <ion-label slot="start">0</ion-label>
+                    <ion-label slot="end">200</ion-label>
+                  </ion-range>
+                </ion-item>
+                <ion-button color="secondary">Guardar</ion-button>
               </ion-card-content>
             </ion-card>
       </ion-col>
-      <ion-col></ion-col>
-      <ion-col></ion-col>
+      <ion-col>
+        <ion-card>
+          <ion-list>
+            <ion-radio-group>
+              <ion-list-header>
+                <ion-label>Modo</ion-label>
+              </ion-list-header>
+          
+              <ion-item>
+                <ion-label>Peso</ion-label>
+                <ion-radio slot="start" value="peso" checked></ion-radio>
+              </ion-item>
+          
+              <ion-item>
+                <ion-label>Venta</ion-label>
+                <ion-radio slot="start" value="venta"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-list>
+          <ion-button color="secondary">Guardar</ion-button>
+        </ion-card>
+      </ion-col>
+
     </ion-row>
   </ion-grid>
 </ion-content>

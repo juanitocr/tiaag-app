@@ -8,10 +8,18 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AngularFireModule} from 'angularfire2';
-import {AngularFireDatabaseModule} from 'angularfire2/database';
-import {ChartsModule} from 'ng2-charts'
-import {environment} from '../environments/environment';
+
+import {AngularFireDatabase,AngularFireDatabaseModule } from 'angularfire2/database';
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from '../environments/environment';
+import {ChartsModule} from 'ng2-charts';
+
+//Servicios
+import {MonitorService} from './services/monitor.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,12 +28,17 @@ import {environment} from '../environments/environment';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment,'firebase'),
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
+    AngularFireStorageModule,
+    AngularFirestoreModule,
+    AngularFireAuthModule,
     ChartsModule
   ],
   providers: [
+    AngularFireDatabase,
     StatusBar,
+    MonitorService,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
