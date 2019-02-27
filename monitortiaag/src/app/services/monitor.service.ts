@@ -3,7 +3,6 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Monitor } from './../interfaces/monitor';
 import { Registro } from './../interfaces/registro';
 import { Observable } from 'rxjs';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -18,33 +17,34 @@ export class MonitorService {
   public list5: Registro[] = [];
   constructor(private afs: AngularFirestore) {
   }
-
   async loadArrays() {
     this.monitorCollection = await this.afs.doc<Monitor>('monitores/1');
     await this.monitorCollection.valueChanges().subscribe(
       (m: Monitor) => {
-        this.monitor = m;
-        this.arraysCollection = this.afs.collection<Registro>('registro', ref => ref.where('rfid', '==', m.rfid).limit(1));
-        this.arraysCollection.valueChanges()
-          .subscribe(
-            (arr: Registro[]) => {
-              this.fechas = [];
-              this.pesos = [];
-              for (const iterator of arr) {
-                this.fechas.push(iterator.fecha);
-                this.pesos.push(iterator.peso);
-              }
-              this.arrays = arr;
-                //Consulta a los datos de la tabla
-              this.listRegistros = this.afs.collection<Registro>('registro', ref => ref.where('ganadero', '==', '1').limit(5));
-              this.arraysCollection.valueChanges()
-                .subscribe(
-                  (arr: Registro[]) => {                      
-                    this.list5 = arr;
-              });
-            }
-          );
+       return  this.monitor = m;       
       });
-    }
-    
+   //while(this.monitor==null){
+   //console.log("..");      
+   // }
+    this.arraysCollection = this.afs.collection<Registro>('registro', ref => ref.where('rfid', '==', this.monitor.rfid).limit(1));
+      this.arraysCollection.valueChanges()
+        .subscribe(
+          (arr: Registro[]) => {
+            this.fechas = [];
+            this.pesos = [];
+            for (const iterator of arr) {
+              this.fechas.push(iterator.fecha);
+              this.pesos.push(iterator.peso);
+            }
+            this.arrays = arr;
+              //Consulta a los datos de la tabla
+            this.listRegistros = this.afs.collection<Registro>('registro', ref => ref.where('ganadero', '==', '1').limit(5));
+            this.arraysCollection.valueChanges()
+              .subscribe(
+                (arr: Registro[]) => {                      
+                  this.list5 = arr;
+            });
+          }
+        );
+    }    
   }
