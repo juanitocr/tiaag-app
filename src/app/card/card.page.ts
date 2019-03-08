@@ -1,5 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import {Chart} from 'chart.js'
+import { NavController, AlertController } from '@ionic/angular';
+import { BorregasService } from '../services/borregas.service';
+import {Borregas} from '../interfaces/borregas';
+import {Crias} from '../interfaces/crias';
+import { Observable } from 'rxjs';
+
+
 
 @Component({
   selector: 'app-card',
@@ -10,6 +17,8 @@ export class CardPage implements OnInit {
   myChart: Chart;
   @ViewChild('chartContainer') chartcontainer: ElementRef;
   @ViewChild('chartcanvas') chartcanvas: ElementRef;
+  borrega: Observable<Borregas>;
+  
   ngAfterViewInit() {
 
     this.createChart();
@@ -40,7 +49,10 @@ export class CardPage implements OnInit {
     });
   }
 
-  constructor() { }
+  constructor(public navCtlr: NavController, public bs: BorregasService, public alertCtrl: AlertController ) {
+    this.bs.loadBorregas();
+    console.log(this.bs.cria);
+   }
 
   ngOnInit() {
   }

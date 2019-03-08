@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { from } from 'rxjs';
 import {IonItemSliding} from '@ionic/angular';
+import {Borregas} from '../interfaces/borregas'
+import { BorregasService } from '../services/borregas.service';
+
 
 @Component({
   selector: 'app-data',
@@ -9,25 +12,20 @@ import {IonItemSliding} from '@ionic/angular';
 })
 export class DataPage implements OnInit {
 searchQuery: string ='';
-items: string[];
+items: Borregas[];
 
-  constructor() {
-    this.initializeItems();
+  constructor(public bs: BorregasService) {
+      bs.loadBorregasColle();
+       console.log("Array",bs.borregacoll);
    }
-initializeItems(){
-  this.items = [
-'Coorderos',
-'Hembras',
-'Machos'
-  ];
-}
+
 
 getItems(ev: any){
-this.initializeItems();
+
 const val = ev.target.value;
 if(val && val.trim() !=''){
-  this.items =this.items.filter((item)=>{
-    return (item.toLowerCase().indexOf(val.toLowerCase()) >- 1);
+  this.bs.borregacoll =this.bs.borregacoll.filter((item)=>{
+    return (item);
   })
 }
 }

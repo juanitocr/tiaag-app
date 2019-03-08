@@ -6,18 +6,17 @@
     <ion-title>Datos</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content padding>
 <ion-row>
   <ion-col>
       <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
       <ion-list #slidingList>
-        <ion-item-sliding *ngFor="let item of items">
+        <ion-item-sliding *ngFor="let item of bs.borregascoll">
         <ion-item >
-          {{ item }}
+          {{ item.arete }}
         </ion-item>
         <ion-item-options side="end">
-       <ion-item-option color="secondary" >
+       <ion-item-option color="secondary">
           View
        </ion-item-option>
        </ion-item-options>

@@ -6,33 +6,33 @@
 
 <ion-content padding>
 <ion-grid>
-  <ion-row size="6">
+  <ion-row size="6" >
     <ion-col text-center size="6">
-      <ion-card>
-        <h1>4222</h1>
-        <h6>5 Kg<h2>50 kg</h2></h6>
-        <h3>Hembra</h3>
+      <ion-card >
+        <h1>{{bs.borrega.arete}} </h1>
+        <h6>{{bs.borrega.peso_nacer}} Kg</h6><h2>{{bs.borrega.peso_actual}} Kg</h2>
+        <h3>{{bs.borrega.genero}}</h3>
       </ion-card>
     </ion-col>
     <ion-col text-center size="6">
       <ion-row>
         <ion-col >
           <h6>Fecha de Nacimiento:</h6>
-          <h4> <strong>2019/02/06</strong></h4>
+          <h4> <strong>{{bs.borrega.fecha_nac | date:'shortDate'}}</strong></h4>
         </ion-col>
         <ion-col >
           <h6>Fecha de Salida:</h6>
-          <h4><strong>2019/02/08</strong></h4>
+          <h4><strong>{{bs.borrega.fecha_salida | date:'shortDate'}}</strong></h4>
         </ion-col>
       </ion-row>
       <ion-row>
           <ion-col >
               <h6>Fecha de Entrada:</h6>
-              <h4> <strong>N/A</strong></h4>
+              <h4> <strong>{{bs.borrega.fecha_entrada | date:'shortDate'}}</strong></h4>
             </ion-col>
             <ion-col >
               <h6>Fecha de Baja:</h6>
-              <h4><strong>N/A</strong></h4>
+              <h4><strong>{{bs.borrega.fecha_baja | date:'shortDate'}}</strong></h4>
             </ion-col>
       </ion-row>
     </ion-col>
@@ -42,40 +42,15 @@
   </ion-row>  
   <ion-row size="6">
         <ion-col>  
-            <ion-list>
+            <ion-list *ngFor="let item of bs.borrega.cria" >
                 <ion-list-header>
-                  <ion-label><strong> Partos</strong></ion-label>
+                  <ion-label><strong> Partos&nbsp;&nbsp;&nbsp;&nbsp;Genero&nbsp;&nbsp;&nbsp;&nbsp;Nacimiento</strong></ion-label>
                 </ion-list-header>
-                <ion-item>1</ion-item>
-                <ion-item>2</ion-item>
+                <ion-item>{{item.parto}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item.genero}}&nbsp;<img src="./../../assets/img/icons8_Happy_104px.png" width="5%">&nbsp;&nbsp;&nbsp;&nbsp;{{item.fecha_nacimiento}}</ion-item>
+             
               </ion-list>
         </ion-col>
-        <ion-col>
-            <ion-list>
-                <ion-list-header>
-                  <ion-label><strong> Hembras</strong></ion-label>
-                </ion-list-header>
-                <ion-item>1 &nbsp;&nbsp;<img src="./../../assets/img/icons8_Happy_104px.png" width="15%">
 
-                </ion-item>
-                <ion-item>2 &nbsp;&nbsp;<img src="./../../assets/img/icons8_Happy_104px.png" width="15%">
-
-                </ion-item>
-              </ion-list>
-        </ion-col>        
-        <ion-col>
-            <ion-list>
-                <ion-list-header>
-                  <ion-label><strong> Machos</strong></ion-label>
-                </ion-list-header>
-                <ion-item>1 &nbsp;&nbsp;<img src="./../../assets/img/icons8_Happy_104px.png" width="15%">
-
-                </ion-item>
-                <ion-item>0 &nbsp;&nbsp;<img src="./../../assets/img/icons8_Cancel_104px_1.png" width="15%">
-
-                </ion-item>
-              </ion-list>
-        </ion-col>
     
       <ion-col size="6">
         <div #chartContainer class='chart-container'>
